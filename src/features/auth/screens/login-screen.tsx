@@ -1,8 +1,13 @@
 import React from "react"
 import { Text, TextInput, TouchableOpacity, ScrollView, View, StatusBar } from "react-native"
-import styles from "./styles"
+import styles from "../styles/login"
+import { router } from "expo-router";
 
-export default function Index() {
+export default function LoginScreen() {
+    const handleRegister = async () => {;
+        router.replace("/(auth)/register");
+    };
+
     return (
         <>
             <ScrollView style={styles.container}>
@@ -36,7 +41,9 @@ export default function Index() {
                             <Text style={styles.orText}>ou</Text>
                             <View style={styles.orLine}/>
                         </View>
-                        <TouchableOpacity style={styles.signUpButton}>
+                        <TouchableOpacity style={styles.signUpButton}
+                            onPress={handleRegister}
+                        >
                             <Text style={styles.signUpButtonText}>Criar Conta</Text>
                         </TouchableOpacity>
                         <Text style={[styles.orText, {textAlign: "center", width: 300, marginBottom: 60}]}>
