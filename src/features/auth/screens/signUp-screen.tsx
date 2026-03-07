@@ -3,78 +3,47 @@ import { Button } from "../../../components/button/Button";
 import { TextInputField } from "../components/form/text-input-field";
 import { SelectField } from "../components/form/select-field";
 import { UploadBox } from "../components/upload/upload-box";
+import { signUpStyles } from "../styles/signup.style";
 
 export function SignUpScreen() {
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: "#F7F7F7" }}
-      contentContainerStyle={{ padding: 16 }}
+      style={signUpStyles.container}
+      contentContainerStyle={signUpStyles.contentContainer}
       showsVerticalScrollIndicator={false}
     >
-        <Text
-            style={{
-                fontSize: 24,
-                fontWeight: "700",
-                color: "#D32F2F",
-                marginBottom: 4,
-                lineHeight: 30,
-            }}
-        >
+        <Text style={signUpStyles.sectionTitle}>
             Dados Pessoais
         </Text>
 
-        <Text style={{ fontSize: 14, opacity: 0.6, marginBottom: 16, lineHeight: 20, fontWeight: "400" }}>
+        <Text style={signUpStyles.sectionDescription}>
             Preencha todas as informações solicitadas
         </Text>
 
-        <View
-            style={{
-                flexDirection: "row",
-                gap: 12,
-            }}
-            >
-            <View style={{ flex: 1 }}>
-                <TextInputField
-                label="Primeiro Nome"
-                placeholder="ex: João"
-                />
+        <View style={signUpStyles.row}>
+            <View style={signUpStyles.flexItem}>
+            <TextInputField label="Primeiro Nome" placeholder="ex: João" />
             </View>
 
-            <View style={{ flex: 1 }}>
-                <TextInputField
-                label="Sobrenome"
-                placeholder="ex: Tambue"
-                />
+            <View style={signUpStyles.flexItem}>
+            <TextInputField label="Sobrenome" placeholder="ex: Tambue" />
             </View>
         </View>
 
-        <View
-            style={{
-                flexDirection: "row",
-                gap: 12,
-            }}
-            >
-                <View style={{ flex: 1 }}>
-                    <TextInputField label="Gênero" placeholder="Selecione" />
-                </View>
+        <View style={signUpStyles.row}>
+            <View style={signUpStyles.flexItem}>
+            <TextInputField label="Gênero" placeholder="Selecione" />
+            </View>
 
-            <View style={{ flex: 1 }}>
-                <TextInputField label="Data de Nascimento" placeholder="DD/MM/AAAA" />
+            <View style={signUpStyles.flexItem}>
+            <TextInputField label="Data de Nascimento" placeholder="DD/MM/AAAA" />
             </View>
         </View>
 
         {/* Contacto e segurança */}
 
-        <View style={{ marginTop: 24 }}>
-            <Text
-                style={{
-                    fontSize: 24,
-                    fontWeight: "700",
-                    color: "#D32F2F",
-                    marginBottom: 4,
-                    lineHeight: 30,
-                }}
-            >
+        <View style={signUpStyles.sectionContainer}>
+            <Text style={signUpStyles.sectionTitle}>
                 Contacto e Segurança
             </Text>
 
@@ -82,20 +51,20 @@ export function SignUpScreen() {
 
             <TextInputField label="E-mail" placeholder="exemplo@email.com" />
 
-            <View style={{ flexDirection: "row", gap: 12 }}>
-                 <View style={{ flex: 1 }}>
+            <View style={signUpStyles.row}>
+                <View style={signUpStyles.flexItem}>
                     <TextInputField
-                        label="Palavra-passe"
-                        placeholder="********"
-                        secureTextEntry
+                    label="Palavra-passe"
+                    placeholder="********"
+                    secureTextEntry
                     />
                 </View>
 
-                <View style={{ flex: 1 }}>
+                <View style={signUpStyles.flexItem}>
                     <TextInputField
-                        label="Confirmar palavra-passe"
-                        placeholder="********"
-                        secureTextEntry
+                    label="Confirmar palavra-passe"
+                    placeholder="********"
+                    secureTextEntry
                     />
                 </View>
             </View>
@@ -103,54 +72,57 @@ export function SignUpScreen() {
 
         {/* Saúde e localização */}
 
-        <View style={{ marginTop: 24 }}>
-            <Text
-            style={{
-                fontSize: 24,
-                fontWeight: "700",
-                color: "#D32F2F",
-                marginBottom: 4,
-                lineHeight: 30,
-            }}
-            >
+        <View style={signUpStyles.sectionContainer}>
+            <Text style={signUpStyles.sectionTitle}>
                 Saúde e Localização
             </Text>
 
-            <SelectField label="Grupo Sanguíneo" placeholder="?" />
+            <View style={signUpStyles.row}>
+                <View style={signUpStyles.flexItem}>
+                    <SelectField
+                    label="Grupo Sanguíneo"
+                    placeholder="?"
+                    options={["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]}
+                    />
+                </View>
 
-            <SelectField label="Província" placeholder="Selecione" />
+                <View style={signUpStyles.flexItem}>
+                    <SelectField
+                        label="Província"
+                        placeholder="Selecione"
+                        options={["Luanda", "Benguela", "Huíla", "Cabinda"]}
+                    />
+                </View>
+            </View>
 
-            <SelectField label="Município" placeholder="Selecione primeiro a província" />
+            <SelectField
+                label="Município"
+                placeholder="Selecione primeiro a província"
+                options={["Talatona", "Viana", "Belas"]}
+            />
 
             <UploadBox />
         </View>
 
-        <Text
-            style={{
-            fontSize: 11,
-            marginTop: 16,
-            opacity: 0.6,
-            textAlign: "center",
-            }}
-        >
-            Ao clicar em "Criar Conta", você concorda com nossos Termos de Serviço
-            e Política de Privacidade.
-        </Text>
-
-        <View style={{ marginTop: 20 }}>
-            <Button title="Criar Conta" />
+        <View style={signUpStyles.termsTextContainer}>
+            <Text style={signUpStyles.termsText}>
+                Ao clicar em "Criar Conta", você concorda com nossos Termos de Serviço
+                e Política de Privacidade.
+            </Text>
         </View>
 
-        <Text
-            style={{
-            textAlign: "center",
-            marginTop: 16,
-            fontSize: 13,
-            }}
-        >
+        <View style={signUpStyles.submitButtonContainer}>
+            <Button 
+                title="Criar Conta" 
+                size="large"
+                icon={require("../../../assets/icons/user-check.png")}
+            />
+        </View>
+
+        <Text style={signUpStyles.loginText}>
             Já tens uma conta?{" "}
-            <Text style={{ color: "#D32F2F", fontWeight: "600" }}>
-            Iniciar Sessão
+            <Text style={signUpStyles.loginLink}>
+                Iniciar Sessão
             </Text>
         </Text>
     </ScrollView>
