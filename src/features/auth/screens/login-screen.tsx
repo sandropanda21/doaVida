@@ -1,57 +1,79 @@
-import React from "react"
-import { Text, TextInput, TouchableOpacity, ScrollView, View, StatusBar } from "react-native"
-import styles from "../styles/login"
+import { ScrollView, View, Text, Image } from "react-native";
+import { Button } from "../../../components/button/Button";
+import { TextInputField } from "../components/form/text-input-field";
+import { loginStyles } from "../styles/login.style";
 import { router } from "expo-router";
 
-export default function LoginScreen() {
-    const handleRegister = async () => {;
-        router.replace("/(auth)/register");
+interface iconImage {
+    image: ReturnType<typeof require>;
+}
+
+const imageIcons: iconImage[] = [
+    {
+        image: require("../../../assets/icons/Icon.png")
+    },
+]
+
+export function LoginScreen() {
+    const heandleCreateAccount = async () => {
+        router.replace("/(tabs)/home");
     };
 
-    return (
-        <>
-            <ScrollView style={styles.container}>
-                <StatusBar backgroundColor={"black"} />
-                <Text style={styles.headerTitle}>DoaVida</Text>
-                <View>
-                    <View style={styles.banner}>
-                        <Text style={styles.bannerText}>
-                            Conectando doadores e recetores em Angola
-                        </Text>
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <View style={styles.input}>
-                            <Text style={styles.inputLabel}>Email</Text>
-                            <TextInput keyboardType="email-address" placeholder="email@gmail.com" style={styles.emailInput} />
-                        </View>
-                        <View style={styles.input}>
-                                <Text style={styles.inputLabel}>Palavra-Passe</Text>
-                                <TextInput placeholder="**************" secureTextEntry={true} style={styles.passwordInput} />
-                        </View>
-                        <Text style={styles.smText}>
-                            Esqueci a palavra-passe?
-                        </Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={styles.logInButton}>
-                            <Text style={styles.logInButtonText}>Entrar</Text>
-                        </TouchableOpacity>
-                        <View style={styles.orContainer}>
-                            <View style={styles.orLine}/>
-                            <Text style={styles.orText}>ou</Text>
-                            <View style={styles.orLine}/>
-                        </View>
-                        <TouchableOpacity style={styles.signUpButton}
-                            onPress={handleRegister}
-                        >
-                            <Text style={styles.signUpButtonText}>Criar Conta</Text>
-                        </TouchableOpacity>
-                        <Text style={[styles.orText, {textAlign: "center", width: 300, marginBottom: 60}]}>
-                            Ao entrar, aceita os nossos Termos de Serviço e Política de Privacidade.
-                        </Text>
-                    </View>
-                </View>
-            </ScrollView>    
-        </>
-    )
+  return (
+    <ScrollView
+      style={loginStyles.container}
+      contentContainerStyle={loginStyles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+        <View style={loginStyles.infoBox}>
+            <Image 
+                source={imageIcons[0].image} 
+                style={{
+                    marginBottom: 16 }} 
+            />
+            <Text style={loginStyles.infoText}>
+                Conectando doadores e receptores em Angola
+            </Text>
+        </View>
+
+        <View style={loginStyles.inputContainer}>
+            <TextInputField
+                label="Telemóvel ou Email"
+                placeholder="Ex: +244 9XX XXX XXX"
+            />
+        </View>
+
+        <View style={loginStyles.inputContainer}>
+            <TextInputField
+                label="Palavra-passe"
+                placeholder="Insira a sua palavra-passe"
+                secureTextEntry
+            />
+            <Text style={loginStyles.forgotPasswordText}>
+                Esqueceu a palavra-passe?
+            </Text>
+        </View>
+
+        <Button title="Entrar" size="large" />
+
+        <Text style={loginStyles.orText}>ou</Text>
+
+        <View style={loginStyles.createAccountButtonContainer}>
+            <Button 
+                onPress={heandleCreateAccount}
+                title="Criar conta" 
+                variant="outline" 
+                size="large" 
+            />
+        </View>
+
+        <View style={loginStyles.termsTextContainer}>
+            <Text style={loginStyles.termsText}>
+                Ao entrar, aceita os nossos{" "}
+                <Text style={loginStyles.primaryColor}>Termos de Serviço</Text> e{" "}
+                <Text style={loginStyles.primaryColor}>Política de Privacidade</Text>.
+            </Text>
+        </View>
+    </ScrollView>
+  );
 }

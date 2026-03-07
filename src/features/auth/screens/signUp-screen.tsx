@@ -4,8 +4,13 @@ import { TextInputField } from "../components/form/text-input-field";
 import { SelectField } from "../components/form/select-field";
 import { UploadBox } from "../components/upload/upload-box";
 import { signUpStyles } from "../styles/signup.style";
+import { router } from "expo-router";
 
 export function SignUpScreen() {
+    const handleLogin = async () => {
+        router.replace("/(auth)/login");
+    };
+
   return (
     <ScrollView
       style={signUpStyles.container}
@@ -40,8 +45,6 @@ export function SignUpScreen() {
             </View>
         </View>
 
-        {/* Contacto e segurança */}
-
         <View style={signUpStyles.sectionContainer}>
             <Text style={signUpStyles.sectionTitle}>
                 Contacto e Segurança
@@ -69,8 +72,6 @@ export function SignUpScreen() {
                 </View>
             </View>
         </View>
-
-        {/* Saúde e localização */}
 
         <View style={signUpStyles.sectionContainer}>
             <Text style={signUpStyles.sectionTitle}>
@@ -121,7 +122,9 @@ export function SignUpScreen() {
 
         <Text style={signUpStyles.loginText}>
             Já tens uma conta?{" "}
-            <Text style={signUpStyles.loginLink}>
+            <Text style={signUpStyles.loginLink}
+                onPress={handleLogin}
+            >
                 Iniciar Sessão
             </Text>
         </Text>
