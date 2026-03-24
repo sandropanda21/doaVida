@@ -1,3 +1,4 @@
+<<<<<<< HEAD:app/(tabs)/profile.tsx
 import * as ImagePicker from 'expo-image-picker'
 import { useRouter } from "expo-router"
 import React, { useEffect, useState } from "react"
@@ -228,3 +229,16 @@ export default function Profile() {
         </>
     )
 }
+=======
+import { View, Text } from "react-native";
+
+export default function ProfileScreen() {
+    return (
+        <>
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                <Text>Profile Screen</Text>
+            </View>
+        </>
+    )
+}
+>>>>>>> 0262965ba9ddecfd3f437962d55b03de512a3f35:src/app/(tabs)/profile.tsx

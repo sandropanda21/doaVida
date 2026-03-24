@@ -1,10 +1,10 @@
 import { useRouter } from "expo-router"
 import React from "react"
-import { StatusBar, Text, TouchableOpacity, View, useWindowDimensions } from "react-native"
+import { StatusBar, Text, TouchableOpacity, View } from "react-native"
 
 export default function Landing() {
     const router = useRouter()
-    
+
     return (
         <View style={{ flex: 1, backgroundColor: '#f1f1f1', justifyContent: 'center', alignItems: 'center', padding: 20 }}>
             <StatusBar backgroundColor={"#E53734"} />
