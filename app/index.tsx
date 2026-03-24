@@ -1,50 +1,38 @@
+import { useRouter } from "expo-router"
 import React from "react"
-import { Text, TextInput, TouchableOpacity, ScrollView, View, StatusBar } from "react-native"
-import styles from "./styles"
+import { StatusBar, Text, TouchableOpacity, View, useWindowDimensions } from "react-native"
 
-export default function Index() {
+export default function Landing() {
+    const router = useRouter()
+    
     return (
-        <>
-            <ScrollView style={styles.container}>
-                <StatusBar backgroundColor={"black"} />
-                <Text style={styles.headerTitle}>DoaVida</Text>
-                <View>
-                    <View style={styles.banner}>
-                        <Text style={styles.bannerText}>
-                            Conectando doadores e recetores em Angola
-                        </Text>
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <View style={styles.input}>
-                            <Text style={styles.inputLabel}>Email</Text>
-                            <TextInput keyboardType="email-address" placeholder="email@gmail.com" style={styles.emailInput} />
-                        </View>
-                        <View style={styles.input}>
-                                <Text style={styles.inputLabel}>Palavra-Passe</Text>
-                                <TextInput placeholder="**************" secureTextEntry={true} style={styles.passwordInput} />
-                        </View>
-                        <Text style={styles.smText}>
-                            Esqueci a palavra-passe?
-                        </Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity style={styles.logInButton}>
-                            <Text style={styles.logInButtonText}>Entrar</Text>
-                        </TouchableOpacity>
-                        <View style={styles.orContainer}>
-                            <View style={styles.orLine}/>
-                            <Text style={styles.orText}>ou</Text>
-                            <View style={styles.orLine}/>
-                        </View>
-                        <TouchableOpacity style={styles.signUpButton}>
-                            <Text style={styles.signUpButtonText}>Criar Conta</Text>
-                        </TouchableOpacity>
-                        <Text style={[styles.orText, {textAlign: "center", width: 300, marginBottom: 60}]}>
-                            Ao entrar, aceita os nossos Termos de Serviço e Política de Privacidade.
-                        </Text>
-                    </View>
-                </View>
-            </ScrollView>    
-        </>
+        <View style={{ flex: 1, backgroundColor: '#f1f1f1', justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+            <StatusBar backgroundColor={"#E53734"} />
+
+            <View style={{ width: 150, height: 150, borderRadius: 75, backgroundColor: '#E53734', justifyContent: 'center', alignItems: 'center', marginBottom: 24 }}>
+                <Text style={{ color: '#fff', fontSize: 48, fontWeight: 'bold' }}>DV</Text>
+            </View>
+
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#E53734', marginBottom: 8 }}>
+                DoaVida
+            </Text>
+
+            <Text style={{ fontSize: 16, color: '#876464', textAlign: 'center', marginBottom: 48, paddingHorizontal: 20 }}>
+                Conectando doadores e quem mais precisa em Angola. Sua doação pode salvar uma vida hoje.
+            </Text>
+
+            <TouchableOpacity
+                style={{ backgroundColor: '#E53734', borderRadius: 12, width: '100%', height: 56, justifyContent: 'center', alignItems: 'center' }}
+                onPress={() => router.push('/signIn')}
+            >
+                <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Começar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{ marginTop: 24 }}
+                onPress={() => router.push('/signUp')}
+            >
+                <Text style={{ color: '#E53734', fontSize: 16, fontWeight: '600' }}>Criar conta agora</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
