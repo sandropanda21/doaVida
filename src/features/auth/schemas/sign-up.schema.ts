@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const phoneRegex = /^(\+244)?9\d{8}$/;
 
@@ -9,19 +9,19 @@ export const signUpSchema = z
     firstName: z
       .string()
       .trim()
-      .min(2, "O primeiro nome deve ter pelo menos 2 caracteres")
-      .max(50, "O primeiro nome é muito longo")
-      .regex(nameRegex, "O nome contém caracteres inválidos"),
+      .min(2, 'O primeiro nome deve ter pelo menos 2 caracteres')
+      .max(50, 'O primeiro nome é muito longo')
+      .regex(nameRegex, 'O nome contém caracteres inválidos'),
 
     lastName: z
       .string()
       .trim()
-      .min(2, "O sobrenome deve ter pelo menos 2 caracteres")
-      .max(50, "O sobrenome é muito longo")
-      .regex(nameRegex, "O sobrenome contém caracteres inválidos"),
+      .min(2, 'O sobrenome deve ter pelo menos 2 caracteres')
+      .max(50, 'O sobrenome é muito longo')
+      .regex(nameRegex, 'O sobrenome contém caracteres inválidos'),
 
-    gender: z.enum(["male", "female", "other"], {
-      error: "Selecione um gênero válido",
+    gender: z.enum(['male', 'female', 'other'], {
+      error: 'Selecione um gênero válido',
     }),
 
     birthDate: z
@@ -29,7 +29,7 @@ export const signUpSchema = z
       .refine((date) => {
         const parsedDate = new Date(date);
         return !isNaN(parsedDate.getTime());
-      }, "Data de nascimento inválida")
+      }, 'Data de nascimento inválida')
       .refine((date) => {
         const parsedDate = new Date(date);
         const today = new Date();
@@ -37,53 +37,37 @@ export const signUpSchema = z
         const age = today.getFullYear() - parsedDate.getFullYear();
 
         return age >= 16;
-      }, "É necessário ter pelo menos 16 anos"),
+      }, 'É necessário ter pelo menos 16 anos'),
 
-    phone: z
-      .string()
-      .trim()
-      .regex(phoneRegex, "Número de telefone inválido"),
+    phone: z.string().trim().regex(phoneRegex, 'Número de telefone inválido'),
 
-    email: z
-      .string()
-      .trim()
-      .toLowerCase()
-      .email("E-mail inválido"),
+    email: z.string().trim().toLowerCase().email('E-mail inválido'),
 
     password: z
       .string()
-      .min(8, "A palavra-passe deve ter pelo menos 8 caracteres")
+      .min(8, 'A palavra-passe deve ter pelo menos 8 caracteres')
       .max(100)
-      .regex(/[A-Z]/, "Deve conter pelo menos uma letra maiúscula")
-      .regex(/[a-z]/, "Deve conter pelo menos uma letra minúscula")
-      .regex(/[0-9]/, "Deve conter pelo menos um número")
-      .regex(/[^A-Za-z0-9]/, "Deve conter pelo menos um caractere especial"),
+      .regex(/[A-Z]/, 'Deve conter pelo menos uma letra maiúscula')
+      .regex(/[a-z]/, 'Deve conter pelo menos uma letra minúscula')
+      .regex(/[0-9]/, 'Deve conter pelo menos um número')
+      .regex(/[^A-Za-z0-9]/, 'Deve conter pelo menos um caractere especial'),
 
     confirmPassword: z.string(),
 
-    bloodType: z.enum(
-      ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
-      {
-        message: "Selecione um grupo sanguíneo válido",
-      }
-    ),
+    bloodType: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], {
+      message: 'Selecione um grupo sanguíneo válido',
+    }),
 
-    province: z
-      .string()
-      .trim()
-      .min(2, "Província inválida"),
+    province: z.string().trim().min(2, 'Província inválida'),
 
-    municipality: z
-      .string()
-      .trim()
-      .min(2, "Município inválido"),
+    municipality: z.string().trim().min(2, 'Município inválido'),
   })
   .superRefine((data, context) => {
     if (data.password !== data.confirmPassword) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
-        path: ["confirmPassword"],
-        message: "As palavras-passe não coincidem",
+        path: ['confirmPassword'],
+        message: 'As palavras-passe não coincidem',
       });
     }
   });

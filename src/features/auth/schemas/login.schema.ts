@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const angolaPhoneRegex = /^(\+244)?9\d{8}$/;
 
@@ -14,15 +14,15 @@ export const loginSchema = z.object({
   identifier: z
     .string()
     .trim()
-    .min(1, "Informe o email ou número de telefone")
+    .min(1, 'Informe o email ou número de telefone')
     .refine(
       (value) => isValidEmail(value) || isValidPhone(value),
-      "Informe um email ou telefone válido"
+      'Informe um email ou telefone válido'
     ),
 
   password: z
     .string()
-    .min(6, "A palavra-passe deve ter pelo menos 6 caracteres")
+    .min(6, 'A palavra-passe deve ter pelo menos 6 caracteres')
     .max(100),
 });
 

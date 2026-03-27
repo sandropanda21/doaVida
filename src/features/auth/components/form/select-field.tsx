@@ -1,60 +1,103 @@
-import { useState } from "react";
-import { View, Text, Pressable, Modal, FlatList, TouchableOpacity, StyleSheet } from "react-native";
-import { styles } from "../../styles/select-fild.style";
-import { SelectFieldProps } from "./type";
+import { useState } from 'react';
+import { Controller, FieldValues } from 'react-hook-form';
+import {
+  FlatList,
+  Modal,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { styles } from '../../styles/select-field.style';
+import { SelectFieldProps } from './type';
 
-export function SelectField({ label, placeholder, options, onValueChange }: SelectFieldProps) {
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
-    setModalVisible(false);
-    onValueChange && onValueChange(value);
-  };
-
+export function SelectField<T extends FieldValues>({
+  control,
+  name,
+  label,
+  placeholder,
+  options,
+  error,
+  disabled = false,
+}: SelectFieldProps<T>) {
   return (
-    <View style={{ marginBottom: 16 }}>
-      <Text style={{ fontSize: 14, marginBottom: 6, fontWeight: "500", lineHeight: 21 }}>{label}</Text>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { onChange, value } }) => {
+        const [modalVisible, setModalVisible] = useState(false);
 
-      <Pressable
-        onPress={() => setModalVisible(true)}
-        style={{
-          height: 56,
-          borderWidth: 1,
-          borderColor: "#E0E0E0",
-          borderRadius: 8,
-          justifyContent: "center",
-          paddingHorizontal: 12,
-          backgroundColor: "#FFF",
-        }}
-      >
-        <Text style={{ opacity: selectedValue ? 1 : 0.6 }}>
-          {selectedValue || placeholder}
-        </Text>
-      </Pressable>
+        const handleSelect = (selectedValue: string) => {
+          onChange(selectedValue);
+          setModalVisible(false);
+        };
 
-      <Modal transparent animationType="fade" visible={modalVisible}>
-        <Pressable
-          style={styles.modalOverlay}
-          onPress={() => setModalVisible(false)}
-        >
-          <View style={styles.modalContent}>
-            <FlatList
-              data={options}
-              keyExtractor={(item) => item}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.optionItem}
-                  onPress={() => handleSelect(item)}
-                >
-                  <Text>{item}</Text>
-                </TouchableOpacity>
-              )}
-            />
+        const selectedLabel =
+          options.find((opt) => opt.value === value)?.label || value;
+
+        return (
+          <View style={{ marginBottom: 16 }}>
+            <Text style={styles.label}>{label}</Text>
+
+            <Pressable
+              onPress={() => !disabled && setModalVisible(true)}
+              style={[
+                styles.selectButton,
+                disabled && styles.disabled,
+                error && styles.errorBorder,
+              ]}
+              disabled={disabled}
+            >
+              <Text
+                style={[styles.selectText, !value && styles.placeholderText]}
+              >
+                {selectedLabel || placeholder}
+              </Text>
+            </Pressable>
+
+            {error && <Text style={styles.errorText}>{error.message}</Text>}
+
+            <Modal
+              transparent
+              animationType='fade'
+              visible={modalVisible}
+              onRequestClose={() => setModalVisible(false)}
+            >
+              <Pressable
+                style={styles.modalOverlay}
+                onPress={() => setModalVisible(false)}
+              >
+                <View style={styles.modalContent}>
+                  <Text style={styles.modalTitle}>{label}</Text>
+
+                  <FlatList
+                    data={options}
+                    keyExtractor={(item) => item.value}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity
+                        style={[
+                          styles.optionItem,
+                          value === item.value && styles.selectedOption,
+                        ]}
+                        onPress={() => handleSelect(item.value)}
+                      >
+                        <Text
+                          style={[
+                            styles.optionText,
+                            value === item.value && styles.selectedOptionText,
+                          ]}
+                        >
+                          {item.label}
+                        </Text>
+                      </TouchableOpacity>
+                    )}
+                  />
+                </View>
+              </Pressable>
+            </Modal>
           </View>
-        </Pressable>
-      </Modal>
-    </View>
+        );
+      }}
+    />
   );
 }
