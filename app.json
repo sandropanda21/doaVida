@@ -28,13 +28,6 @@
       "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
-<<<<<<< HEAD
-      "expo-router"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
-=======
       [
         "expo-router",
         {
@@ -42,6 +35,5 @@
         }
       ]
     ]
->>>>>>> 0262965ba9ddecfd3f437962d55b03de512a3f35
   }
 }

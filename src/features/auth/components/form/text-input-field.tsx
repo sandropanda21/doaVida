@@ -1,6 +1,6 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, TextInputProps } from "react-native";
 
-type TextInputFieldProps = {
+type TextInputFieldProps = TextInputProps & {
   label: string;
   placeholder?: string;
   secureTextEntry?: boolean;
@@ -10,6 +10,7 @@ export function TextInputField({
   label,
   placeholder,
   secureTextEntry,
+  ...rest
 }: TextInputFieldProps) {
   return (
     <View style={{ marginBottom: 16,  }}>
@@ -23,7 +24,6 @@ export function TextInputField({
       >
         {label}
       </Text>
-
       <TextInput
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
@@ -35,6 +35,7 @@ export function TextInputField({
           paddingHorizontal: 12,
           backgroundColor: "#FFF",
         }}
+        {...rest}
       />
     </View>
   );

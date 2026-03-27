@@ -22,12 +22,8 @@ const baseStyles = StyleSheet.create({
     gap: 8
   },
 
-  icon: {
-    marginRight: 4
-  },
-
   text: {
-    fontWeight: "600"
+    fontWeight: "semibold"
   }
 })
 

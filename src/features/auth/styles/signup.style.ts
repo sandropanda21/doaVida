@@ -4,6 +4,7 @@ export const signUpStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F7F7F7",
+    marginTop: 16,
   },
 
   contentContainer: {
@@ -60,6 +61,7 @@ export const signUpStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
     lineHeight: 24,
+    marginBottom: 20
   },
 
   loginLink: {

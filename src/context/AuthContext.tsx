@@ -1,7 +1,42 @@
 import { Session, User } from '@supabase/supabase-js'
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { Profile, supabase } from '../lib/supabase'
+const userData: User = {
+  id: "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+  aud: "authenticated",
+  role: "authenticated",
 
+  email: "sandro@example.com",
+  phone: "+244900000000",
+
+  created_at: "2026-03-25T10:00:00.000Z",
+  updated_at: "2026-03-25T12:00:00.000Z",
+  last_sign_in_at: "2026-03-25T12:00:00.000Z",
+
+  confirmed_at: "2026-03-25T10:05:00.000Z",
+  email_confirmed_at: "2026-03-25T10:05:00.000Z",
+  phone_confirmed_at: "2026-03-25T10:06:00.000Z",
+
+  app_metadata: {
+    provider: "email",
+    providers: ["email"]
+  },
+
+  user_metadata: {
+    full_name: "Sandro Panda",
+    avatar_url: "https://example.com/avatar.png"
+  },
+
+  identities: [],
+
+  is_anonymous: false,
+  is_sso_user: false,
+
+  factors: [],
+
+  deleted_at: undefined,
+  banned_until: undefined
+}
 interface AuthContextType {
   user: User | null
   profile: Profile | null
@@ -17,7 +52,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>(userData)
   const [session, setSession] = useState<Session | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
@@ -25,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
-      setUser(session?.user ?? null)
+      setUser(null)
       if (session?.user) {
         fetchProfile(session.user.id)
       } else {

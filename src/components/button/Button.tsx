@@ -1,8 +1,8 @@
 import React from "react"
 import {
+  ActivityIndicator,
   Pressable,
   Text,
-  ActivityIndicator,
   View,
 } from "react-native"
 
@@ -37,7 +37,9 @@ export function Button({
         <ActivityIndicator />
       ) : (
         <View style={buttonStyles.content}>
-          {icon && <View style={buttonStyles.icon}>{icon}</View>}
+          {icon && <View style={buttonStyles.icon}>
+            <Text>{icon}</Text>
+          </View>}
 
           <Text
             style={[

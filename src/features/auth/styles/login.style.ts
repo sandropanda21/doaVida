@@ -4,6 +4,7 @@ export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
+    marginTop: 20,
   },
 
   contentContainer: {
@@ -33,7 +34,7 @@ export const loginStyles = StyleSheet.create({
   },
 
   inputContainer: {
-    marginBottom: 16,
+    marginBottom: 12,
   },
 
   forgotPasswordText: {
@@ -52,11 +53,11 @@ export const loginStyles = StyleSheet.create({
   },
 
   createAccountButtonContainer: {
-    marginBottom: 32,
+    marginBottom: 16,
   },
 
   termsTextContainer: {
-    marginTop: 16,
+    marginBottom: 20
   },
 
   termsText: {
