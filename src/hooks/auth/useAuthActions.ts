@@ -1,4 +1,3 @@
-import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert } from 'react-native';
 import { LoginFormData } from '../../features/auth/schemas/login.schema';
@@ -9,7 +8,6 @@ export function useAuthActions() {
   const [loading, setLoading] = useState(false);
 
   const login = async (data: LoginFormData) => {
-    const router = useRouter();
     setLoading(true);
     try {
       let result;
@@ -32,7 +30,6 @@ export function useAuthActions() {
       if (result.error) throw result.error;
 
       Alert.alert('Sucesso', 'Login realizado com sucesso!');
-      router.replace('(tabs)/home');
     } catch (error: any) {
       Alert.alert('Erro', error.message || 'Falha ao fazer login');
     } finally {
@@ -41,9 +38,6 @@ export function useAuthActions() {
   };
 
   const signUp = async (data: SignUpFormData) => {
-    alert(
-      'Função de cadastro ainda não implementada. Por favor, use a função de login para acessar a aplicação.'
-    );
     setLoading(true);
     try {
       const { error } = await supabase.auth.signUp({

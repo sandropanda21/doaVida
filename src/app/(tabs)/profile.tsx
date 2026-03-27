@@ -1,5 +1,5 @@
 import ProfileScreen from '../../features/auth/screens/profile-screen';
 
 export default function Profile() {
-  return ProfileScreen;
+  return <ProfileScreen />;
 }

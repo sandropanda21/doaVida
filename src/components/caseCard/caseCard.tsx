@@ -1,6 +1,6 @@
 import { Heart, MapPin, SquarePlus } from "lucide-react-native";
 import { ImageBackground, Pressable, Text, View } from "react-native";
-import { Button } from "../../../../components/button/Button";
+import { Button } from "../button/Button";
 import { ADDRESS, HOSPITAL, IMAGE } from "./caseCard.constants";
 import { caseCard } from "./caseCard.style";
 import { CaseCardProps } from "./interface";

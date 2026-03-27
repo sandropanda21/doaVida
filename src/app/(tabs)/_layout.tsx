@@ -1,10 +1,11 @@
 import { Tabs } from "expo-router";
-import { Home, CirclePlus, UserRound } from  "lucide-react-native"
+import { CirclePlus, Home, UserRound } from "lucide-react-native";
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: true,
+        tabBarActiveTintColor: "#E53734"
       }}
     >
       <Tabs.Screen
@@ -35,6 +36,15 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => (
             <UserRound color={color} size={size} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="caseDetails"
+        options={{
+          title: "Detalhes do Pedido",
+          tabBarIcon: ({ color, size }) => (
+            <UserRound color={color} size={size} />
+          )
         }}
       />
     </Tabs>
