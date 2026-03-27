@@ -7,7 +7,10 @@ import { createOrder } from "../styles/createOrder.style"
 export default function CreateOrderScreen() {
   return (
     <>
-      <ScrollView style={createOrder.container}>
+      <ScrollView
+        style={createOrder.container}
+        showsVerticalScrollIndicator={false}
+      >
         <Text style={createOrder.newAskText}>
           Novo Pedido de Sangue
         </Text>
