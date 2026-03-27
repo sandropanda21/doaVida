@@ -9,6 +9,7 @@ export function useAuthActions() {
 
   const login = async (data: LoginFormData) => {
     setLoading(true);
+    console.log(data);
     try {
       let result;
 
@@ -39,14 +40,14 @@ export function useAuthActions() {
 
   const signUp = async (data: SignUpFormData) => {
     setLoading(true);
+
     try {
       const { error } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
         options: {
           data: {
-            first_name: data.firstName,
-            last_name: data.lastName,
+            name: data.name,
             phone: data.phone,
             gender: data.gender,
             birth_date: data.birthDate,

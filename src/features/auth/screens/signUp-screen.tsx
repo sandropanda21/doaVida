@@ -48,20 +48,10 @@ export function SignUpScreen() {
         <View style={signUpStyles.flexItem}>
           <TextInputField
             control={control}
-            name='firstName'
-            label='Primeiro Nome'
-            placeholder='ex: João'
-            error={errors.firstName}
-          />
-        </View>
-
-        <View style={signUpStyles.flexItem}>
-          <TextInputField
-            control={control}
-            name='lastName'
-            label='Sobrenome'
-            placeholder='ex: Silva'
-            error={errors.lastName}
+            name='name'
+            label='Nome completo'
+            placeholder='ex: João Silva'
+            error={errors.name}
           />
         </View>
       </View>
@@ -120,7 +110,7 @@ export function SignUpScreen() {
             placeholder='sua senha'
             error={errors.password}
           />
-        </View>{' '}
+        </View>
         <View style={signUpStyles.flexItem}>
           <TextInputField
             control={control}

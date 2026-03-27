@@ -10,7 +10,7 @@ import { profileScreen } from '../styles/profile.style';
 export default function ProfileScreen() {
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
 
-  const { signOut, Loading } = useAuthActions();
+  const { signOut, loading } = useAuthActions();
   const { user } = useAuth();
   const toggleSwitch = () => setIsAvailable((previousState) => !previousState);
   return (
@@ -22,7 +22,7 @@ export default function ProfileScreen() {
         <View style={profileScreen.imageContainer}>
           <View style={profileScreen.image} />
           <Text style={profileScreen.username}>
-            {user?.user_metadata?.first_name} {user?.user_metadata?.last_name}
+            {user?.user_metadata?.first_name} {user?.user_metadata?.name}
           </Text>
         </View>
         <View style={profileScreen.bloodTypeContainer}>
@@ -72,6 +72,8 @@ export default function ProfileScreen() {
         </View>
         <View style={profileScreen.logOutButtonContainer}>
           <Button
+            disabled={loading}
+            loading={loading}
             onPress={() => {
               signOut();
             }}

@@ -1,71 +1,63 @@
-import { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
-import CaseCard from "../../../components/caseCard/caseCard";
-import styles from "../../../components/dropdown/dropdown.styles";
-import { homeStyles } from "../styles/home.style";
+import { useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
+import CaseCard from '../../../components/caseCard/caseCard';
+import styles from '../../../components/dropdown/dropdown.styles';
+import { useBloodRequests } from '../../../hooks/blood/useBloodRequests';
+import { homeStyles } from '../styles/home.style';
 
-const data = [
-  { label: "A+", value: "A+" },
-  { label: "A-", value: "A-" },
-  { label: "B+", value: "B+" },
-  { label: "B-", value: "B-" },
-  { label: "AB+", value: "AB+" },
-  { label: "AB-", value: "AB-" },
-  { label: "O+", value: "O+" },
-  { label: "O-", value: "O-" },
-]
+const bloodTypes = [
+  { label: 'Todos', value: '' },
+  { label: 'A+', value: 'A+' },
+  { label: 'A-', value: 'A-' },
+  { label: 'B+', value: 'B+' },
+  { label: 'B-', value: 'B-' },
+  { label: 'AB+', value: 'AB+' },
+  { label: 'AB-', value: 'AB-' },
+  { label: 'O+', value: 'O+' },
+  { label: 'O-', value: 'O-' },
+];
+
 export default function HomeScreen() {
-  const [pickBloodType, setPickBloodType] = useState<string | null>(null);
+  const [selectedBloodType, setSelectedBloodType] = useState<string>('');
+  const { requests, loading } = useBloodRequests();
+
+  const filteredRequests = selectedBloodType
+    ? requests.filter((r) => r.blood_type === selectedBloodType)
+    : requests;
+
   return (
-    <>
-      <View style={homeStyles.container}>
-        <Dropdown
-          labelField={"label"}
-          data={data}
-          valueField={"value"}
-          value={pickBloodType}
-          onChange={item => setPickBloodType(item.value)}
-          iconColor="#171111"
-          style={styles.dropdown}
-          placeholder="Tipo Sanguíneo"
-        />
-        <Text style={homeStyles.askText}>
-          Pedidos Urgentes
-        </Text>
-        <ScrollView
-          contentContainerStyle={homeStyles.casesList}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={homeStyles.casesList}>
+    <View style={homeStyles.container}>
+      <Dropdown
+        data={bloodTypes}
+        labelField='label'
+        valueField='value'
+        value={selectedBloodType}
+        onChange={(item) => setSelectedBloodType(item.value)}
+        placeholder='Filtrar por Tipo Sanguíneo'
+        style={styles.dropdown}
+      />
+
+      <Text style={homeStyles.askText}>
+        Pedidos Urgentes {selectedBloodType && `(${selectedBloodType})`}
+      </Text>
+
+      <ScrollView contentContainerStyle={homeStyles.casesList}>
+        {loading ? (
+          <Text>Carregando pedidos...</Text>
+        ) : filteredRequests.length === 0 ? (
+          <Text>Nenhum pedido encontrado</Text>
+        ) : (
+          filteredRequests.map((request) => (
             <CaseCard
-              patientName="João Santos"
-              status="Urgente"
-              bloodType="O+ Positivo"
+              key={request.id}
+              patientName={request.patient_name}
+              bloodType={`${request.blood_type} Positivo`}
+              status={request.urgency || request.status}
             />
-            <CaseCard
-              patientName="Santos António"
-              status="Urgente"
-              bloodType="O+ Negativo"
-            />
-            <CaseCard
-              patientName="Luciano Mendes"
-              status="Rotina"
-              bloodType="A+ Positivo"
-            />
-            <CaseCard
-              patientName="Inês Augusto"
-              status="Urgente"
-              bloodType="AB+ Positivo"
-            />
-            <CaseCard
-              patientName="José Maria"
-              status="Urgente"
-              bloodType="O+ Positivo"
-            />
-          </View>
-        </ScrollView>
-      </View>
-    </>
-  )
+          ))
+        )}
+      </ScrollView>
+    </View>
+  );
 }

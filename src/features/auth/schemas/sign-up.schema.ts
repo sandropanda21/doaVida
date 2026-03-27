@@ -6,19 +6,12 @@ const nameRegex = /^[A-Za-zÀ-ÿ\s'-]+$/;
 
 export const signUpSchema = z
   .object({
-    firstName: z
+    name: z
       .string()
       .trim()
-      .min(2, 'O primeiro nome deve ter pelo menos 2 caracteres')
-      .max(50, 'O primeiro nome é muito longo')
+      .min(2, 'O nome completo deve ter pelo menos 2 caracteres')
+      .max(100, 'O nome completo é muito longo')
       .regex(nameRegex, 'O nome contém caracteres inválidos'),
-
-    lastName: z
-      .string()
-      .trim()
-      .min(2, 'O sobrenome deve ter pelo menos 2 caracteres')
-      .max(50, 'O sobrenome é muito longo')
-      .regex(nameRegex, 'O sobrenome contém caracteres inválidos'),
 
     gender: z.enum(['male', 'female', 'other'], {
       error: 'Selecione um gênero válido',
