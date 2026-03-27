@@ -64,7 +64,7 @@ export const signUpSchema = z
     bloodType: z.enum(
       ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
       {
-        message: "Selecione um grupo sanguíneo válido",
+        error: "Selecione um grupo sanguíneo válido",
       }
     ),
 
