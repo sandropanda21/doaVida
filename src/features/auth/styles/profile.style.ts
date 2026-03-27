@@ -1,0 +1,117 @@
+import { StyleSheet } from "react-native";
+
+export const profileScreen = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  imageContainer: {
+    alignItems: "center",
+    gap: 8,
+  },
+  image: {
+    height: 120,
+    width: 120,
+    backgroundColor: "red",
+    borderRadius: "50%",
+  },
+  username: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  bloodTypeContainer: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: "#E5DCDC",
+    alignContent: "center",
+    justifyContent: "center",
+    gap: 4,
+    marginTop: 24,
+  },
+  bloodTypeLabel: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#876464",
+    textAlign: "center",
+  },
+  bloodType: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#D32F2F",
+    textAlign: "center",
+  },
+  bloodDonators: {
+    height: 24,
+    width: 125,
+    borderRadius: 9999,
+    backgroundColor: "#E53734",
+    color: "#fff",
+    fontSize: 12,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 2,
+    alignSelf: "center",
+  },
+  availabilityContainer: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: "#E5DCDC",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 28,
+    marginTop: 16,
+  },
+  availabilityText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#171111",
+    marginBottom: 4,
+  },
+  availabilityDescription: {
+    fontSize: 14,
+    fontWeight: "regular",
+    color: "#876464",
+  },
+  donationInformationContainer: {
+    backgroundColor: "#E53734",
+    padding: 16,
+    borderRadius: 12,
+    gap: 8,
+    marginTop: 16,
+    marginBottom: 28,
+  },
+  donationInformationLastDateLabel: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    fontSize: 14,
+    fontWeight: "regular",
+    color: "#fff",
+  },
+  donationInformationLastDate: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  donationDateForNextDonor: {
+    fontSize: 14,
+    fontWeight: "regular",
+    color: "#fff",
+  },
+  donationHistoricContainer: {
+    gap: 12,
+    marginBottom: 40,
+  },
+  donationHistoricTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#171111",
+  },
+  logOutButtonContainer: {
+    marginBottom: 30,
+  },
+});

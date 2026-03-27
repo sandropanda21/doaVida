@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, Pressable, Modal, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import { FlatList, Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../../styles/select-fild.style";
 import { SelectFieldProps } from "./type";
 

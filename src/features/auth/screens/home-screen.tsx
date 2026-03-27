@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import CaseCard from "../../../components/caseCard/caseCard";
 import styles from "../../../components/dropdown/dropdown.styles";
-import CaseCard from "../components/caseCard/caseCard";
 import { homeStyles } from "../styles/home.style";
 
 const data = [
