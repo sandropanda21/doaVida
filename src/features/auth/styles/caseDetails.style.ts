@@ -6,7 +6,7 @@ export const caseDetails = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingHorizontal: 16,
-    paddingVertical: 14,
+    // paddingVertical: 14,
     paddingTop: 42,
     borderBottomWidth: 1,
     borderBottomColor: '#f1f1f1',
@@ -24,7 +24,6 @@ export const caseDetails = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    paddingTop: 42,
   },
   hospitalInfoContainer: {
     gap: 8,

@@ -1,4 +1,4 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { ArrowLeft, CircleCheck, ClipboardList, Dot, Phone, UserRound } from 'lucide-react-native';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
@@ -7,24 +7,9 @@ import { caseDetails } from '../../features/auth/styles/caseDetails.style';
 import { Button } from '../../components/button/Button';
 
 export default function CaseDetailsScreen() {
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { request, loading, error } = useBloodRequestById(id);
-
-  if (loading) {
-    return (
-      <View style={caseDetails.container}>
-        <Text>Carregando detalhes...</Text>
-      </View>
-    );
-  }
-
-  if (error || !request) {
-    return (
-      <View style={caseDetails.container}>
-        <Text>Pedido não encontrado ou erro ao carregar.</Text>
-      </View>
-    );
-  }
 
   return (
     <>
@@ -39,7 +24,21 @@ export default function CaseDetailsScreen() {
 
         <Text style={caseDetails.headerTitle}>Detalhes do Pedido</Text>
       </View>
-    <ScrollView style={caseDetails.container}>
+    <ScrollView
+        style={caseDetails.container}
+        contentContainerStyle={{ paddingBottom: 40 }}
+        showsVerticalScrollIndicator={false}
+      >
+        {loading ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 80 }}>
+            <Text>Carregando detalhes...</Text>
+          </View>
+        ) : error || !request ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 80 }}>
+            <Text>Pedido não encontrado ou ocorreu um erro ao carregar.</Text>
+          </View>
+        ) : (
+          <>  
       <View style={caseDetails.hospitalInfoContainer}>
         <View style={caseDetails.hospitalNameAndBloodType}>
           <Text style={caseDetails.hospitalName}>
@@ -93,7 +92,6 @@ export default function CaseDetailsScreen() {
         </View>
       </View>
 
-      {/* Requisitos Obrigatórios (mantidos estáticos como você tinha) */}
       <View style={caseDetails.sectionContainer}>
         <View style={caseDetails.sectionHeader}>
           <ClipboardList color={"#E53734"} />
@@ -126,6 +124,8 @@ export default function CaseDetailsScreen() {
           // onPress={() => Linking.openURL(`tel:${request.contact_phone}`)} ← pode adicionar depois
         />
       </View>
+      </>
+      )}
     </ScrollView>
     </>
   );
