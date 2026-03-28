@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Alert } from 'react-native';
 import { LoginFormData } from '../../features/auth/schemas/login.schema';
 import { SignUpFormData } from '../../features/auth/schemas/sign-up.schema';
 import { supabase } from '../../lib/supabase';
+import Toast from 'react-native-toast-message';
 
 export function useAuthActions() {
   const [loading, setLoading] = useState(false);
@@ -21,18 +21,25 @@ export function useAuthActions() {
           password: data.password,
         });
       } else {
-        Alert.alert(
-          'Aviso',
-          'Login com telefone via SMS ainda não implementado.'
-        );
+        Toast.show({
+          type: 'info',
+          text1: 'Login com telefone via SMS ainda não implementado.'
+        });
         return;
       }
 
       if (result.error) throw result.error;
 
-      Alert.alert('Sucesso', 'Login realizado com sucesso!');
+      Toast.show({
+        type: 'success', 
+        text1: 'Login realizado com sucesso!'
+      });
     } catch (error: any) {
-      Alert.alert('Erro', error.message || 'Falha ao fazer login');
+      Toast.show({
+        type: 'error', 
+        text1: 'Erro',
+        text2: error.message || 'Falha ao fazer login',
+      });
     } finally {
       setLoading(false);
     }
@@ -60,12 +67,15 @@ export function useAuthActions() {
 
       if (error) throw error;
 
-      Alert.alert(
-        'Conta criada!',
-        'Verifique o seu email para confirmar o registo.'
-      );
+      Toast.show({
+        type: 'success',
+        text1: 'Conta criada!',
+        text2: 'Verifique o seu email para confirmar o registo.'
+    });
     } catch (error: any) {
-      Alert.alert('Erro no cadastro', error.message);
+      Toast.show({
+        type: 'error',
+        text1: error.message || 'Erro no cadastro' });
     } finally {
       setLoading(false);
     }
@@ -73,7 +83,9 @@ export function useAuthActions() {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
-    if (error) Alert.alert('Erro', error.message);
+    if (error) Toast.show({
+      type: 'error',
+      text1: error.message || 'Erro'});
   };
 
   return {
