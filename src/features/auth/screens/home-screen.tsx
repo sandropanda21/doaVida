@@ -5,6 +5,7 @@ import CaseCard from '../../../components/caseCard/caseCard';
 import styles from '../../../components/dropdown/dropdown.styles';
 import { useBloodRequests } from '../../../hooks/blood/useBloodRequests';
 import { homeStyles } from '../styles/home.style';
+import { useRouter } from 'expo-router';
 
 const bloodTypes = [
   { label: 'Todos', value: '' },
@@ -19,6 +20,7 @@ const bloodTypes = [
 ];
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [selectedBloodType, setSelectedBloodType] = useState<string>('');
   const { requests, loading } = useBloodRequests();
 
@@ -54,6 +56,7 @@ export default function HomeScreen() {
               patientName={request.patient_name}
               bloodType={`${request.blood_type} Positivo`}
               status={request.urgency || request.status}
+              onPress={() => router.push(`/details/${request.id}`)}
             />
           ))
         )}

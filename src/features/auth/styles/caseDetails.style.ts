@@ -1,9 +1,30 @@
 import { StyleSheet } from "react-native";
 
 export const caseDetails = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    paddingTop: 42,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f1f1f1',
+  },
+  backButton: {
+    padding: 6,
+  },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#171111',
+    marginLeft: 12,
+  },
+
   container: {
     flex: 1,
     padding: 16,
+    paddingTop: 42,
   },
   hospitalInfoContainer: {
     gap: 8,

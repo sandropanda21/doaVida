@@ -42,6 +42,7 @@ export default function CaseCard({
           title='Quero Doar'
           size='medium'
           icon={<Heart color={'#fff'} size={20} />}
+          onPress={onPress}
         />
       </View>
     </Pressable>
