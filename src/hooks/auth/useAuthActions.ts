@@ -36,8 +36,9 @@ export function useAuthActions() {
       });
     } catch (error: any) {
       Toast.show({
-        type: 'Erro', 
-        text1: error.message || 'Falha ao fazer login'
+        type: 'error', 
+        text1: 'Erro',
+        text2: error.message || 'Falha ao fazer login',
       });
     } finally {
       setLoading(false);
