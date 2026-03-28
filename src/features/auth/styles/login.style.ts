@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
-    marginTop: 20,
+    backgroundColor: '#FFFFFF',
+    marginTop: 0,
   },
 
   contentContainer: {
@@ -12,23 +12,23 @@ export const loginStyles = StyleSheet.create({
   },
 
   logoContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 24,
   },
 
   infoBox: {
-    backgroundColor: "#FDE2E2",
+    backgroundColor: '#FDE2E2',
     borderRadius: 12,
     padding: 16,
     paddingVertical: 24,
     marginBottom: 24,
-    alignItems: "center",
+    alignItems: 'center',
   },
 
   infoText: {
-    color: "#D32F2F",
-    fontWeight: "600",
-    textAlign: "center",
+    color: '#D32F2F',
+    fontWeight: '600',
+    textAlign: 'center',
     fontSize: 16,
     lineHeight: 24,
   },
@@ -38,7 +38,7 @@ export const loginStyles = StyleSheet.create({
   },
 
   forgotPasswordText: {
-    color: "#D32F2F",
+    color: '#D32F2F',
     fontSize: 14,
     marginTop: 8,
     lineHeight: 21,
@@ -46,10 +46,10 @@ export const loginStyles = StyleSheet.create({
   },
 
   orText: {
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 16,
     fontSize: 14,
-    color: "#999",
+    color: '#999',
   },
 
   createAccountButtonContainer: {
@@ -57,18 +57,18 @@ export const loginStyles = StyleSheet.create({
   },
 
   termsTextContainer: {
-    marginBottom: 20
+    marginBottom: 20,
   },
 
   termsText: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 12,
-    fontWeight: "400",
+    fontWeight: '400',
     lineHeight: 21,
-    color: "#999",
+    color: '#999',
   },
 
   primaryColor: {
-    color: "#D32F2F",
+    color: '#D32F2F',
   },
 });

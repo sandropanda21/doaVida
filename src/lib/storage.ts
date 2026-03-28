@@ -1,5 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class LocalStorageService {
   static async setItem(key: string, value: string): Promise<void> {

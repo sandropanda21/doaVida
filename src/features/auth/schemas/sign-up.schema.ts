@@ -6,19 +6,12 @@ const nameRegex = /^[A-Za-zÀ-ÿ\s'-]+$/;
 
 export const signUpSchema = z
   .object({
-    firstName: z
+    name: z
       .string()
       .trim()
-      .min(2, "O primeiro nome deve ter pelo menos 2 caracteres")
-      .max(50, "O primeiro nome é muito longo")
+      .min(2, "O nome completo deve ter pelo menos 2 caracteres")
+      .max(100, "O nome completo é muito longo")
       .regex(nameRegex, "O nome contém caracteres inválidos"),
-
-    lastName: z
-      .string()
-      .trim()
-      .min(2, "O sobrenome deve ter pelo menos 2 caracteres")
-      .max(50, "O sobrenome é muito longo")
-      .regex(nameRegex, "O sobrenome contém caracteres inválidos"),
 
     gender: z.enum(["male", "female", "other"], {
       error: "Selecione um gênero válido",
@@ -39,16 +32,9 @@ export const signUpSchema = z
         return age >= 16;
       }, "É necessário ter pelo menos 16 anos"),
 
-    phone: z
-      .string()
-      .trim()
-      .regex(phoneRegex, "Número de telefone inválido"),
+    phone: z.string().trim().regex(phoneRegex, "Número de telefone inválido"),
 
-    email: z
-      .string()
-      .trim()
-      .toLowerCase()
-      .email("E-mail inválido"),
+    email: z.string().trim().toLowerCase().email("E-mail inválido"),
 
     password: z
       .string()
@@ -61,22 +47,13 @@ export const signUpSchema = z
 
     confirmPassword: z.string(),
 
-    bloodType: z.enum(
-      ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
-      {
-        message: "Selecione um grupo sanguíneo válido",
-      }
-    ),
+    bloodType: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"], {
+      message: "Selecione um grupo sanguíneo válido",
+    }),
 
-    province: z
-      .string()
-      .trim()
-      .min(2, "Província inválida"),
+    province: z.string().trim().min(2, "Província inválida"),
 
-    municipality: z
-      .string()
-      .trim()
-      .min(2, "Município inválido"),
+    municipality: z.string().trim().min(2, "Município inválido"),
   })
   .superRefine((data, context) => {
     if (data.password !== data.confirmPassword) {
