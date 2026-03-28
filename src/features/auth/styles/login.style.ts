@@ -4,7 +4,7 @@ export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    marginTop: 0,
+    marginTop: 30,
   },
 
   contentContainer: {

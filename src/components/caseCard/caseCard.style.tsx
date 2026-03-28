@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const caseCard = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   caseCard: {
     backgroundColor: '#fff',
     borderRadius: 12,
@@ -10,24 +13,14 @@ export const caseCard = StyleSheet.create({
     height: 150,
     width: '100%',
     paddingTop: 85,
-
     paddingBottom: 16,
   },
-  caseStatus: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#fff',
-    backgroundColor: '#E53935',
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 4,
-    width: 130,
-  },
   bloodInfo: {
-    fontSize: 20,
+    fontSize: 36,
     fontWeight: 'bold',
     color: '#fff',
     marginTop: 4,
+    marginLeft: 16,
   },
   caseInfo: {
     backgroundColor: '#fff',

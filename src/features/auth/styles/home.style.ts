@@ -14,7 +14,7 @@ export const homeStyles = StyleSheet.create({
   },
   casesList: {
     marginTop: 10,
-    marginBottom: 20,
+    paddingBottom: 16,
     gap: 18,
   },
 });

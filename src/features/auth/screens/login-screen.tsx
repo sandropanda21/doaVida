@@ -58,10 +58,11 @@ export function LoginScreen() {
         <View style={loginStyles.inputContainer}>
           <TextInputField
             control={control}
-            label='Telemóvel ou Email'
-            placeholder='Ex: +244 9XX XXX XXX'
+            label='Email'
+            placeholder='email@gmail.com'
             name={'identifier'}
             error={errors.identifier}
+            keyboardType='email-address'
           />
         </View>
 
@@ -70,9 +71,10 @@ export function LoginScreen() {
             control={control}
             label='Palavra-passe'
             placeholder='Insira a sua palavra-passe'
-            secureTextEntry
             name={'password'}
             error={errors.password}
+            secureTextEntry
+            isPassword
           />
           <Text style={loginStyles.forgotPasswordText}>
             Esqueceu a palavra-passe?

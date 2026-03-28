@@ -42,6 +42,7 @@ function AuthNavigator() {
             <Stack.Screen name="(tabs)/requests" />
             <Stack.Screen name="(tabs)/new-request" />
             <Stack.Screen name="(tabs)/profile" />
+            <Stack.Screen name="(stack)/notifications" />
         </Stack>
     )
 }

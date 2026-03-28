@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -5,7 +6,6 @@ import CaseCard from '../../../components/caseCard/caseCard';
 import styles from '../../../components/dropdown/dropdown.styles';
 import { useBloodRequests } from '../../../hooks/blood/useBloodRequests';
 import { homeStyles } from '../styles/home.style';
-import { useRouter } from 'expo-router';
 
 const bloodTypes = [
   { label: 'Todos', value: '' },
@@ -44,7 +44,10 @@ export default function HomeScreen() {
         Pedidos Urgentes {selectedBloodType && `(${selectedBloodType})`}
       </Text>
 
-      <ScrollView contentContainerStyle={homeStyles.casesList}>
+      <ScrollView
+        contentContainerStyle={homeStyles.casesList}
+        showsVerticalScrollIndicator={false}
+      >
         {loading ? (
           <Text>Carregando pedidos...</Text>
         ) : filteredRequests.length === 0 ? (
@@ -54,8 +57,7 @@ export default function HomeScreen() {
             <CaseCard
               key={request.id}
               patientName={request.patient_name}
-              bloodType={`${request.blood_type} Positivo`}
-              status={request.urgency || request.status}
+              bloodType={`${request.blood_type} `}
               onPress={() => router.push(`/details/${request.id}`)}
             />
           ))

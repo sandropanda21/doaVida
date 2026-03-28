@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { View, Text, Pressable, Image, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { useState } from "react";
+import { Alert, Image, Pressable, Text, View } from "react-native";
 
 export function UploadBox() {
   const [imageUri, setImageUri] = useState<string | null>(null);
@@ -53,9 +53,14 @@ export function UploadBox() {
 
   return (
     <View style={{ marginTop: 10 }}>
-      <Text style={{ fontSize: 14, marginBottom: 12, fontWeight: "500", lineHeight: 21 }}>
-        Upload do Bilhete de Identidade (BI)
-      </Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Text style={{ fontSize: 14, marginBottom: 12, fontWeight: "500", lineHeight: 21 }}>
+          Upload do Bilhete de Identidade
+        </Text>
+        <Text style={{ fontSize: 14, color: "#E53935", fontWeight: "400" }}>
+          (Opcional)
+        </Text>
+      </View>
 
       <Pressable
         onPress={handlePress}

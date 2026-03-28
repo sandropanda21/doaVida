@@ -136,6 +136,6 @@ export const caseDetails = StyleSheet.create({
   },
   buttonsContainer: {
     gap: 12,
-    marginBottom: 30
+    marginBottom: 30,
   },
 });

@@ -1,3 +1,5 @@
+import { Eye, EyeOff } from 'lucide-react-native';
+import { useState } from 'react';
 import {
   Control,
   Controller,
@@ -5,13 +7,20 @@ import {
   FieldPath,
   FieldValues,
 } from 'react-hook-form';
-import { Text, TextInput, TextInputProps, View } from 'react-native';
+import {
+  Text,
+  TextInput,
+  TextInputProps,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 type TextInputFieldProps<T extends FieldValues> = TextInputProps & {
   label: string;
   name: FieldPath<T>;
   control: Control<T>;
   error?: FieldError;
+  isPassword?: boolean;
 };
 
 export function TextInputField<T extends FieldValues>({
@@ -21,8 +30,13 @@ export function TextInputField<T extends FieldValues>({
   error,
   secureTextEntry,
   placeholder,
+  isPassword = false,
   ...rest
 }: TextInputFieldProps<T>) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const isSecure = isPassword ? !showPassword : secureTextEntry;
+
   return (
     <View style={{ marginBottom: 16 }}>
       <Text
@@ -39,22 +53,44 @@ export function TextInputField<T extends FieldValues>({
         control={control}
         name={name}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder={placeholder}
-            secureTextEntry={secureTextEntry}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
+          <View
             style={{
-              height: 56,
+              flexDirection: 'row',
+              alignItems: 'center',
               borderWidth: 1,
               borderColor: error ? 'red' : '#E0E0E0',
               borderRadius: 10,
-              paddingHorizontal: 12,
               backgroundColor: '#FFF',
             }}
-            {...rest}
-          />
+          >
+            <TextInput
+              style={{
+                flex: 1,
+                height: 56,
+                paddingHorizontal: 12,
+              }}
+              placeholder={placeholder}
+              secureTextEntry={isSecure}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              autoCapitalize="none"
+              {...rest}
+            />
+
+            {isPassword && (
+              <TouchableOpacity
+                onPress={() => setShowPassword(!showPassword)}
+                style={{ paddingHorizontal: 12 }}
+              >
+                {showPassword ? (
+                  <EyeOff size={20} color="#555" />
+                ) : (
+                  <Eye size={20} color="#555" />
+                )}
+              </TouchableOpacity>
+            )}
+          </View>
         )}
       />
 

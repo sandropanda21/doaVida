@@ -8,7 +8,6 @@ import { CaseCardProps } from './interface';
 export default function CaseCard({
   patientName,
   bloodType,
-  status,
   onPress,
 }: CaseCardProps) {
   return (
@@ -20,7 +19,6 @@ export default function CaseCard({
         borderTopLeftRadius={12}
       >
         <View>
-          <Text style={caseCard.caseStatus}>{status}</Text>
           <Text style={caseCard.bloodInfo}>{bloodType}</Text>
         </View>
       </ImageBackground>
