@@ -2,6 +2,7 @@ import { Stack, usePathname, useRouter } from "expo-router"
 import { useEffect } from "react"
 import { ActivityIndicator, View } from "react-native"
 import { AuthProvider, useAuth } from "../context/AuthContext"
+import Toast from 'react-native-toast-message';
 
 
 function AuthNavigator() {
@@ -51,6 +52,8 @@ export default function RootLayout() {
             <AuthProvider>
                 <AuthNavigator />
             </AuthProvider>
+
+            <Toast position="top"/>
         </>
     )
 }
