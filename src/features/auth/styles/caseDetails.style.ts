@@ -12,13 +12,13 @@ export const caseDetails = StyleSheet.create({
   },
   backButton: {
     padding: 8,
-    marginLeft: 8,
+    marginLeft: 20,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#2f2f2fff",
-    marginLeft: 4,
+    marginLeft: 20,
   },
 
   container: {

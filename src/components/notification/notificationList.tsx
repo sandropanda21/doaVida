@@ -1,10 +1,10 @@
 import { FlatList } from "react-native";
 import NotificationItem from "./notificationItem";
-import { Notification } from "./notificationType";
+import { NotificationDB } from "./notificationType";
 
 type Props = {
-  data: Notification[];
-  onPress: (item: Notification) => void;
+  data: NotificationDB[];
+  onPress: (item: NotificationDB) => void;
 };
 
 export default function NotificationList({ data, onPress }: Props) {

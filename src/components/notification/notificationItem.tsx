@@ -1,13 +1,12 @@
 import { Asterisk, CircleCheck } from "lucide-react-native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Notification } from "./notificationType";
+import { NotificationDB, NotificationDBType } from "./notificationType";
 
 type Props = {
-  item: Notification;
-  onPress: (item: Notification) => void;
+  item: NotificationDB;
+  onPress: (item: NotificationDB) => void;
 };
 
-// Formata a data para "há X min / horas / dias"
 function formatRelativeTime(isoString: string): string {
   const diff = Date.now() - new Date(isoString).getTime();
   const minutes = Math.floor(diff / 60000);
@@ -19,17 +18,10 @@ function formatRelativeTime(isoString: string): string {
   return `há ${days} dia${days > 1 ? "s" : ""}`;
 }
 
-// Gera a mensagem dinamicamente com base no tipo e nos dados do pedido
-function buildMessage(item: Notification): string {
-  switch (item.type) {
-    case "BLOOD_REQUEST":
-      return `Precisa-se de sangue do tipo ${item.bloodType ?? "—"}. A sua doação pode salvar vidas.`;
-    case "DONOR_FOUND":
-      return `Doador encontrado. O seu pedido foi aceite por ${item.donorCount ?? 0} doador${(item.donorCount ?? 0) !== 1 ? "es" : ""}.`;
-    default:
-      return "";
-  }
-}
+const TYPE_LABEL: Record<NotificationDBType, string> = {
+  compatible_request: "Pedido de Sangue",
+  new_volunteer: "Doador Encontrado",
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -59,7 +51,7 @@ const styles = StyleSheet.create({
   textBlock: {
     flex: 1,
   },
-  type: {
+  typeLabel: {
     fontWeight: "700",
     fontSize: 14,
     color: "#1A1A1A",
@@ -74,7 +66,7 @@ const styles = StyleSheet.create({
     color: "#4B5563",
     lineHeight: 18,
     marginTop: 4,
-    paddingLeft: 34, // alinha com o texto do header (ícone 20 + gap 10 + margin)
+    paddingLeft: 34,
   },
   unreadDot: {
     width: 8,
@@ -87,21 +79,18 @@ const styles = StyleSheet.create({
 });
 
 export default function NotificationItem({ item, onPress }: Props) {
-  const isUnread = !item.read;
+  const isUnread = !item.is_read;
 
   const renderIcon = () => {
     switch (item.type) {
-      case "BLOOD_REQUEST":
+      case "compatible_request":
         return <Asterisk color="#E53734" size={20} />;
-      case "DONOR_FOUND":
+      case "new_volunteer":
         return <CircleCheck color="#16A34A" size={20} />;
       default:
         return null;
     }
   };
-
-  const typeLabel =
-    item.type === "BLOOD_REQUEST" ? "Pedido de Sangue" : "Doador Encontrado";
 
   return (
     <TouchableOpacity
@@ -114,16 +103,13 @@ export default function NotificationItem({ item, onPress }: Props) {
         <View style={styles.header}>
           <View style={styles.iconWrapper}>{renderIcon()}</View>
           <View style={styles.textBlock}>
-            <Text style={styles.type}>{typeLabel}</Text>
-            <Text style={styles.time}>{formatRelativeTime(item.createdAt)}</Text>
+            <Text style={styles.typeLabel}>{TYPE_LABEL[item.type]}</Text>
+            <Text style={styles.time}>{formatRelativeTime(item.created_at)}</Text>
           </View>
         </View>
-
-        {/* MENSAGEM DINÂMICA */}
-        <Text style={styles.message}>{buildMessage(item)}</Text>
+        <Text style={styles.message}>{item.message}</Text>
       </View>
 
-      {/* DOT de não lida */}
       {isUnread && <View style={styles.unreadDot} />}
     </TouchableOpacity>
   );

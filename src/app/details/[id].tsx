@@ -45,7 +45,7 @@ export default function CaseDetailsScreen() {
           style={caseDetails.backButton}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <ArrowLeft color="#171111" size={20} />
+          <ArrowLeft color="#171111" size={24} />
         </Pressable>
 
         <Text style={caseDetails.headerTitle}>Detalhes do Pedido</Text>

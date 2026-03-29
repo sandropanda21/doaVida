@@ -72,7 +72,7 @@ export function SignUpScreen() {
             control={control}
             name='birthDate'
             label='Data de Nascimento'
-            placeholder='DD-MM-AAAA'
+            placeholder='AAAA-MM-DD'
             error={errors.birthDate}
             keyboardType='decimal-pad'
           />

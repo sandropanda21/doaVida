@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { LoginFormData } from '../../features/auth/schemas/login.schema';
-import { SignUpFormData } from '../../features/auth/schemas/sign-up.schema';
-import { supabase } from '../../lib/supabase';
-import Toast from 'react-native-toast-message';
+import { useState } from "react";
+import Toast from "react-native-toast-message";
+import { LoginFormData } from "../../features/auth/schemas/login.schema";
+import { SignUpFormData } from "../../features/auth/schemas/sign-up.schema";
+import { supabase } from "../../lib/supabase";
 
 export function useAuthActions() {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ export function useAuthActions() {
     try {
       let result;
 
-      const isEmail = data.identifier.includes('@');
+      const isEmail = data.identifier.includes("@");
 
       if (isEmail) {
         result = await supabase.auth.signInWithPassword({
@@ -22,8 +22,8 @@ export function useAuthActions() {
         });
       } else {
         Toast.show({
-          type: 'info',
-          text1: 'Login com telefone via SMS ainda não implementado.'
+          type: "info",
+          text1: "Login com telefone via SMS ainda não implementado.",
         });
         return;
       }
@@ -31,14 +31,14 @@ export function useAuthActions() {
       if (result.error) throw result.error;
 
       Toast.show({
-        type: 'success', 
-        text1: 'Login realizado com sucesso!'
+        type: "success",
+        text1: "Login realizado com sucesso!",
       });
     } catch (error: any) {
       Toast.show({
-        type: 'error', 
-        text1: 'Erro',
-        text2: error.message || 'Falha ao fazer login',
+        type: "error",
+        text1: "Erro",
+        text2: error.message || "Falha ao fazer login",
       });
     } finally {
       setLoading(false);
@@ -47,6 +47,7 @@ export function useAuthActions() {
 
   const signUp = async (data: SignUpFormData) => {
     setLoading(true);
+    console.log(data);
 
     try {
       const { error } = await supabase.auth.signUp({
@@ -64,18 +65,19 @@ export function useAuthActions() {
           },
         },
       });
-
+      console.log("Sign-up result:", { error });
       if (error) throw error;
 
       Toast.show({
-        type: 'success',
-        text1: 'Conta criada!',
-        text2: 'Verifique o seu email para confirmar o registo.'
-    });
+        type: "success",
+        text1: "Conta criada!",
+        text2: "Verifique o seu email para confirmar o registo.",
+      });
     } catch (error: any) {
       Toast.show({
-        type: 'error',
-        text1: error.message || 'Erro no cadastro' });
+        type: "error",
+        text1: error.message || "Erro no cadastro",
+      });
     } finally {
       setLoading(false);
     }
@@ -83,9 +85,11 @@ export function useAuthActions() {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
-    if (error) Toast.show({
-      type: 'error',
-      text1: error.message || 'Erro'});
+    if (error)
+      Toast.show({
+        type: "error",
+        text1: error.message || "Erro",
+      });
   };
 
   return {

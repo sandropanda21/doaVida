@@ -1,9 +1,19 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useNotifications } from "../../../app/(stack)/_layout";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import NotificationList from "../../../components/notification/notificationList";
-import { Notification } from "../../../components/notification/notificationType";
+import { NotificationDB } from "../../../components/notification/notificationType";
+import { useMarkNotification } from "../../../hooks/notification/useMarkNotification";
+import { useNotifications } from "../../../hooks/notification/useNotifications";
+
+// Substitui pelo teu hook de sessão
+import { useAuth } from "../../../context/AuthContext";
 
 type FilterType = "all" | "unread";
 
@@ -11,6 +21,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 12,
+  },
+  errorText: {
+    color: "#E53734",
+    fontSize: 14,
+    textAlign: "center",
+    paddingHorizontal: 32,
   },
   tabsRow: {
     flexDirection: "row",
@@ -48,26 +70,48 @@ const styles = StyleSheet.create({
 
 export default function NotificationsScreen() {
   const router = useRouter();
-  const { notifications, setNotifications } = useNotifications();
+  const { user } = useAuth();
   const [filter, setFilter] = useState<FilterType>("all");
 
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const { notifications, unreadCount, isLoading, fetchError } =
+    useNotifications(user?.id ?? "");
+
+  const { markAsRead } = useMarkNotification();
 
   const filtered =
-    filter === "all" ? notifications : notifications.filter((n) => !n.read);
+    filter === "all"
+      ? notifications
+      : notifications.filter((n) => !n.is_read);
 
-  const handleNotificationPress = (item: Notification) => {
-    // Marca como lida
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === item.id ? { ...n, read: true } : n))
-    );
-    // Navega para o detalhe do pedido
-    router.push(`/details/${item.requestId}`);
+  const handlePress = async (item: NotificationDB) => {
+    if (!item.is_read) {
+      await markAsRead(item.id);
+    }
+    if (item.related_id) {
+      router.push(`/details/${item.related_id}`);
+    }
   };
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator color="#E53734" />
+      </View>
+    );
+  }
+
+  if (fetchError) {
+    return (
+      <View style={styles.centered}>
+        <Text style={styles.errorText}>
+          Não foi possível carregar as notificações.{"\n"}{fetchError}
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      {/* FILTROS */}
       <View style={styles.tabsRow}>
         <TouchableOpacity
           style={[styles.tab, filter === "all" && styles.tabActive]}
@@ -90,9 +134,7 @@ export default function NotificationsScreen() {
           {unreadCount > 0 && <View style={styles.unreadBadge} />}
         </TouchableOpacity>
       </View>
-
-      {/* LISTA */}
-      <NotificationList data={filtered} onPress={handleNotificationPress} />
+      <NotificationList data={filtered} onPress={handlePress} />
     </View>
   );
 }
