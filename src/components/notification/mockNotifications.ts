@@ -1,8 +1,5 @@
 import { Notification } from "./notificationType";
 
-// Apenas para desenvolvimento — em produção os dados vêm do backend.
-// A mensagem NÃO é armazenada aqui; é gerada dinamicamente no NotificationItem
-// a partir de bloodType e donorCount.
 export const notifications: Notification[] = [
   {
     id: "1",

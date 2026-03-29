@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { mockRequests } from '../../../components/requestCard/mockRequests';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import RequestList from '../../../components/requestCard/requestList';
+import { useUserRequests } from '../../../hooks/useUserRequests';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,13 +16,32 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 12,
   },
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default function MyRequestsScreen() {
+  const { userRequests, loading, error } = useUserRequests();
+  if (loading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color="#E53734" />
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Histórico de Pedidos</Text>
-      <RequestList data={mockRequests} />
+      {userRequests.length > 0 ? (
+        <RequestList data={userRequests} />
+      ) : (
+        <View style={styles.centered}>
+          <Text>Você ainda não realizou nenhum pedido.</Text>
+        </View>
+      )}
     </View>
   );
 }

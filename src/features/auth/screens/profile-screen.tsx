@@ -13,6 +13,18 @@ export default function ProfileScreen() {
   const { signOut, loading } = useAuthActions();
   const { user } = useAuth();
   const toggleSwitch = () => setIsAvailable((previousState) => !previousState);
+  const getInitials = () => {
+    const firstName = user?.user_metadata?.first_name || "";
+    const lastName = user?.user_metadata?.name || ""; // No teu código usas 'name' para o último nome
+
+    if (!firstName && !lastName) return "??";
+
+    // Pega a primeira letra de cada um e coloca em maiúsculas
+    const firstInitial = firstName.charAt(0).toUpperCase();
+    const lastInitial = lastName.charAt(0).toUpperCase();
+
+    return `${firstInitial}${lastInitial}`;
+  };
   return (
     <>
       <ScrollView
@@ -20,7 +32,11 @@ export default function ProfileScreen() {
         showsVerticalScrollIndicator={false}
       >
         <View style={profileScreen.imageContainer}>
-          <View style={profileScreen.image} />
+          <View style={profileScreen.image} >
+            <Text style={profileScreen.usernameAbbreviation}>
+              {getInitials()}
+            </Text>
+          </View>
           <Text style={profileScreen.username}>
             {user?.user_metadata?.first_name} {user?.user_metadata?.name}
           </Text>

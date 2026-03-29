@@ -6,14 +6,22 @@ export const profileScreen = StyleSheet.create({
     padding: 16,
   },
   imageContainer: {
+    justifyContent: "center",
     alignItems: "center",
     gap: 8,
   },
   image: {
+    justifyContent: "center",
+    alignItems: "center",
     height: 120,
     width: 120,
     backgroundColor: "red",
     borderRadius: "50%",
+  },
+  usernameAbbreviation: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#fff",
   },
   username: {
     fontSize: 18,

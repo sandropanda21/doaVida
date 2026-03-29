@@ -1,9 +1,9 @@
-export type RequestStatus = "ativo" | "em revisão" | "concluído";
+export type RequestStatus = "active" | "pending" | "fulfilled";
 
 export interface BloodRequest {
   id: string;
-  nome_paciente: string;
-  tipo_sanguineo: string;
-  data_pedido: string;
-  estado: RequestStatus;
+  patient_name: string;
+  blood_type: string;
+  created_at: string;
+  status: RequestStatus;
 }

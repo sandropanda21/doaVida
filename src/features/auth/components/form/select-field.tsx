@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Controller, FieldValues } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import {
   FlatList,
   Modal,
@@ -20,12 +20,13 @@ export function SelectField<T extends FieldValues>({
   error,
   disabled = false,
 }: SelectFieldProps<T>) {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <Controller
-      control={control}
+       control={control as Control<T, any>}
       name={name}
       render={({ field: { onChange, value } }) => {
-        const [modalVisible, setModalVisible] = useState(false);
 
         const handleSelect = (selectedValue: string) => {
           onChange(selectedValue);

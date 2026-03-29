@@ -66,34 +66,46 @@ export default function CreateOrderScreen() {
         />
 
         <View style={createOrder.selectInputs}>
-          <SelectField
-            control={control}
-            name='blood_type'
-            label='Tipo Sanguíneo'
-            placeholder='Selecione'
-            options={[
-              { label: 'A+', value: 'A+' },
-              { label: 'A-', value: 'A-' },
-              { label: 'B+', value: 'B+' },
-              { label: 'B-', value: 'B-' },
-              { label: 'AB+', value: 'AB+' },
-              { label: 'AB-', value: 'AB-' },
-              { label: 'O+', value: 'O+' },
-              { label: 'O-', value: 'O-' },
-            ]}
-            error={errors.blood_type}
-          />
-
+          <View style={createOrder.selectInput}>
+            <SelectField
+              control={control}
+              name='blood_type'
+              label='Tipo Sanguíneo'
+              placeholder='AB+'
+              options={[
+                { label: 'A+', value: 'A+' },
+                { label: 'A-', value: 'A-' },
+                { label: 'B+', value: 'B+' },
+                { label: 'B-', value: 'B-' },
+                { label: 'AB+', value: 'AB+' },
+                { label: 'AB-', value: 'AB-' },
+                { label: 'O+', value: 'O+' },
+                { label: 'O-', value: 'O-' },
+              ]}
+              error={errors.blood_type}
+            />
+          </View>
           <SelectField
             control={control}
             name='bags_quantity'
             label='Quantidade de Bolsas'
-            placeholder='Selecione'
+            placeholder='5'
             options={[
               { label: '1 bolsa', value: '1' },
               { label: '2 bolsas', value: '2' },
               { label: '3 bolsas', value: '3' },
               { label: '4 bolsas', value: '4' },
+              { label: '5 bolsas', value: '5' },
+              { label: '6 bolsas', value: '6' },
+              { label: '7 bolsas', value: '7' },
+              { label: '8 bolsas', value: '8' },
+              { label: '9 bolsas', value: '9' },
+              { label: '10 bolsas', value: '10' },
+              { label: '11 bolsas', value: '11' },
+              { label: '12 bolsas', value: '12' },
+              { label: '13 bolsas', value: '13' },
+              { label: '14 bolsas', value: '14' },
+              { label: '15 bolsas', value: '15' },
             ]}
             error={errors.bags_quantity}
           />
@@ -103,7 +115,7 @@ export default function CreateOrderScreen() {
           control={control}
           name='contact_phone'
           label='Contacto de Emergência'
-          placeholder='923 456 789'
+          placeholder='+244 9XX XXX XXX'
           keyboardType='phone-pad'
           error={errors.contact_phone}
         />
@@ -112,7 +124,7 @@ export default function CreateOrderScreen() {
           control={control}
           name='description'
           label='Descrição da Situação'
-          placeholder='Conte um pouco sobre a necessidade...'
+          placeholder='Conte um pouco sobre o caso...'
           multiline
           numberOfLines={5}
           error={errors.description}

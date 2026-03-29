@@ -2,23 +2,23 @@ import { StyleSheet } from "react-native";
 
 export const caseDetails = StyleSheet.create({
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    // paddingVertical: 14,
-    paddingTop: 42,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    paddingTop: 35,
+    paddingBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f1f1',
+    borderBottomColor: "#f1f1f1",
   },
   backButton: {
-    padding: 6,
+    padding: 8,
+    marginLeft: 8,
   },
   headerTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#171111',
-    marginLeft: 12,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2f2f2fff",
+    marginLeft: 4,
   },
 
   container: {

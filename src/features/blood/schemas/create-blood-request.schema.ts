@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const createBloodRequestSchema = z.object({
   patient_name: z
-    .string()
+    .string({ error: 'Digite o nome do paciente' })
     .trim()
     .min(3, 'O nome do paciente deve ter pelo menos 3 caracteres')
     .max(100, 'Nome muito longo'),
@@ -20,7 +20,7 @@ export const createBloodRequestSchema = z.object({
     .min(1, 'Selecione a quantidade'),
 
   contact_phone: z
-    .string()
+    .string({ error: 'Digite o número de telefone' })
     .trim()
     .min(9, 'Número de telefone inválido')
     .regex(

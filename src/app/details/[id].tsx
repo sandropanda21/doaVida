@@ -1,16 +1,41 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import * as Linking from 'expo-linking';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, CircleCheck, ClipboardList, Dot, Phone, UserRound } from 'lucide-react-native';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
-import * as Linking from 'expo-linking';
 import { Button } from '../../components/button/Button';
+import { useAuth } from '../../context/AuthContext';
 import { caseDetails } from '../../features/auth/styles/caseDetails.style';
+import { isCompatible, type BloodType } from '../../functions/checkEligibility';
 import { useBloodRequestById } from '../../hooks/blood/useBloodRequestById';
+import { useVolunteer } from '../../hooks/useVolunteer';
 
 export default function CaseDetailsScreen() {
   const router = useRouter();
+  const { user } = useAuth();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { request, loading, error } = useBloodRequestById(id);
+
+
+  const { registerVolunteer, isSubmitting } = useVolunteer();
+
+  async function handleConfirmAvailability() {
+    if (!user || !request) return;
+    const isCompatibleBlood = isCompatible(user?.user_metadata?.blood_type, request?.blood_type as BloodType);
+
+    if (!isCompatibleBlood) {
+      alert('Você não é compatível para doar sangue para este pedido.');
+      return;
+    }
+
+    const result = await registerVolunteer(request.id, user.id);
+
+    if (result.success) {
+      alert('Obrigado! Sua disponibilidade foi registrada com sucesso.');
+    } else {
+      alert(result.message || 'Erro ao confirmar disponibilidade.');
+    }
+  }
 
   return (
     <>
@@ -20,7 +45,7 @@ export default function CaseDetailsScreen() {
           style={caseDetails.backButton}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <ArrowLeft color="#171111" size={28} />
+          <ArrowLeft color="#171111" size={20} />
         </Pressable>
 
         <Text style={caseDetails.headerTitle}>Detalhes do Pedido</Text>
@@ -117,7 +142,7 @@ export default function CaseDetailsScreen() {
             </View>
 
             <View style={caseDetails.buttonsContainer}>
-              <Button title="Confirmar Disponibilidade" icon={<CircleCheck color={"#fff"} />} />
+              <Button onPress={handleConfirmAvailability} title="Confirmar Disponibilidade" icon={<CircleCheck color={"#fff"} />} />
               <Button
                 title="Ligar Agora"
                 icon={<Phone color={"#E53734"} />}

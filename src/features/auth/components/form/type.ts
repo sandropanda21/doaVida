@@ -1,4 +1,4 @@
-import { Control, FieldError, FieldPath, FieldValues } from 'react-hook-form';
+import { Control, FieldError, FieldPath, FieldValues } from "react-hook-form";
 
 export type Option = {
   label: string;
@@ -6,7 +6,7 @@ export type Option = {
 };
 
 export type SelectFieldProps<T extends FieldValues> = {
-  control?: Control<T>;
+  control: Control<T, any>;
   label: string;
   placeholder: string;
   options: Option[];

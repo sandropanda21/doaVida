@@ -8,7 +8,7 @@ export interface BloodRequest {
   hospital: string;
   contact_phone: string;
   description: string;
-  status: 'pending' | 'fulfilled' | 'cancelled';
+  status: 'active' | 'pending' | 'fulfilled';
   urgency: 'high' | 'medium' | 'low';
   user_id: string;
   document_url: string | null;

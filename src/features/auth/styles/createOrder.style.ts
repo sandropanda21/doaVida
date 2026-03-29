@@ -26,4 +26,7 @@ export const createOrder = StyleSheet.create({
     flexDirection: "row",
     gap: 8,
   },
+  selectInput: {
+    flex: 1,
+  },
 });

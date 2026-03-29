@@ -14,6 +14,7 @@ export default function RequestList({ data }: Props) {
       renderItem={({ item }) => (
         <RequestCard item={item}  />
       )}
+      showsVerticalScrollIndicator={false}
     />
   );
 }
